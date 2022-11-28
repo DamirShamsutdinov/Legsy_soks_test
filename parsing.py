@@ -6,7 +6,7 @@ from pprint import pprint
 import requests
 
 
-def url(pages):
+def get_url(pages):
     headers = {
         'Accept': '*/*',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
@@ -32,7 +32,7 @@ def get_data(articul, products_list=[]):
     curch_pages = range(1, 7)
 
     try:
-        products = url(curch_pages)
+        products = get_url(curch_pages)
     except:
         return print('Ошибка в получении урла')
 

@@ -1,12 +1,12 @@
-import json
-from pprint import pprint
-
-with open('catch_product.json', 'r', encoding='utf8') as file:
-    data = json.load(file)
-for i in data:
-    print(i)
-print()
-pprint(data)
+# import json
+# from pprint import pprint
+#
+# with open('catch_product.json', 'r', encoding='utf8') as file:
+#     data = json.load(file)
+# for i in data:
+#     print(i)
+# print()
+# pprint(data)
 
 
 # a = [12, 213, 323, 545, 234, 67, 7, 4, 3, 2, 1]
@@ -20,3 +20,9 @@ pprint(data)
 #         print(f'Страницы {i} не существует')
 #         break
 # print(l)
+from pprint import pprint
+
+import aiofiles
+
+d = aiofiles
+pprint(dir(d))
