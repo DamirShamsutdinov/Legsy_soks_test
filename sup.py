@@ -20,9 +20,15 @@
 #         print(f'Страницы {i} не существует')
 #         break
 # print(l)
-from pprint import pprint
+# from pprint import pprint
+#
+# import aiofiles
+#
+# d = aiofiles
+# pprint(dir(d))
 
-import aiofiles
 
-d = aiofiles
-pprint(dir(d))
+list2 = input()
+sup_value = [int(i) for i in list2.split()]
+print(sup_value)
+

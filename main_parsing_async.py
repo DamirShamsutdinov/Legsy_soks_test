@@ -1,6 +1,7 @@
 import asyncio
-import time
 import json
+import time
+
 import aiohttp
 
 
@@ -23,7 +24,7 @@ async def get_url(pages):
 
 async def get_data(articuls_list, products_list=[]):
     count = 1
-    curch_pages = range(1, 7)
+    curch_pages = range(1, 5)
     products = await get_url(curch_pages)
     for sub_item in products:
         for item in sub_item:
@@ -35,23 +36,22 @@ async def get_data(articuls_list, products_list=[]):
                         'pr_page': count,
                     })
         count += 1
-    with open('catch_async.json', mode='w', encoding='utf8') as f:
+    with open('main_parsing_async.json', mode='w', encoding='utf8') as f:
         json.dump(products_list, f, indent=4, ensure_ascii=False)
 
 
-async def main():
-    await get_data([86210392, 39408901, 100749785, 43127482, 44325545, 64746739])
-    # await get_data(86210392)
-    # await get_data(39408901)
-    # await get_data(100749785)
-    # await get_data(43127482)
-    # await get_data(44325545)
-    # await get_data(64746739)
-    # await get_data(54673003) """на 100 стр."""
+# list1 = [86210392 39408901 100749785 43127482 44325545 64746739 54673003]
+# list1 = [int(i) for i in input().split()]
+# start_time = time.time()
+# asyncio.get_event_loop().run_until_complete(get_data(articuls_list=list1))
+# print('--- %s seconds ---' % (time.time() - start_time))
 
 
-if __name__ == '__main__':
-    start_time = time.time()
-    # asyncio.run(main())
-    asyncio.get_event_loop().run_until_complete(main())
-    print('--- %s seconds ---' % (time.time() - start_time))
+# async def collect_data(add_list: list) -> json:
+#     await get_data(add_list)
+#
+#
+# if __name__ == '__main__':
+#     start_time = time.time()
+#     sup_value = asyncio.get_event_loop().run_until_complete(collect_data(list1))
+#     print('--- %s seconds ---' % (time.time() - start_time))
