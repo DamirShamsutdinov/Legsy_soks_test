@@ -54,6 +54,7 @@ async def main():
     await get_data(43127482)
     await get_data(44325545)
     await get_data(64746739)
+    # await get_data(54673003)
 
 
 if __name__ == '__main__':
