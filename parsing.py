@@ -1,8 +1,5 @@
 import time
-import hashlib
 import json
-from pprint import pprint
-
 import requests
 
 
@@ -11,9 +8,7 @@ def get_url(pages):
         'Accept': '*/*',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
     }
-
     search_list = []
-
     for page in pages:
         if page:
             response = requests.get(
@@ -27,7 +22,7 @@ def get_url(pages):
     return search_list
 
 
-def get_data(articul, products_list=[]):
+def get_data(articuls_list, products_list=[]):
     count = 1
     curch_pages = range(1, 7)
 
@@ -39,12 +34,13 @@ def get_data(articul, products_list=[]):
     try:
         for sub_item in products:
             for item in sub_item:
-                if item['id'] == articul:
-                    products_list.append({
-                        'pr_articul': item['id'],
-                        'pr_name': item['name'],
-                        'pr_page': count,
-                    })
+                for articul in articuls_list:
+                    if item['id'] == articul:
+                        products_list.append({
+                            'pr_articul': item['id'],
+                            'pr_name': item['name'],
+                            'pr_page': count,
+                        })
             count += 1
     except:
         print(f'Не получается распарсить страницу {sub_item} по задданным ключам')
@@ -57,13 +53,14 @@ def get_data(articul, products_list=[]):
 
 
 def main():
-    get_data(86210392)
-    get_data(39408901)
-    get_data(100749785)
-    get_data(43127482)
-    get_data(44325545)
-    get_data(64746739)
-    # get_data(54673003)
+    get_data([86210392, 39408901, 100749785, 43127482, 44325545, 64746739])
+    # get_data(86210392)
+    # get_data(39408901)
+    # get_data(100749785)
+    # get_data(43127482)
+    # get_data(44325545)
+    # get_data(64746739)
+    # await get_data(54673003) """на 100 стр."""
 
 if __name__ == '__main__':
     start_time = time.time()

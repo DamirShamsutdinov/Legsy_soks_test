@@ -1,12 +1,7 @@
 import asyncio
 import time
-import hashlib
 import json
-from pprint import pprint
-
-import aiofiles
 import aiohttp
-import requests
 
 
 async def get_url(pages):
@@ -15,7 +10,6 @@ async def get_url(pages):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
     }
     search_list = []
-
     async with aiohttp.ClientSession() as session:
         for page in pages:
             async with session.get(
@@ -27,34 +21,33 @@ async def get_url(pages):
         return search_list
 
 
-async def get_data(articul, products_list=[]):
+async def get_data(articuls_list, products_list=[]):
     count = 1
     curch_pages = range(1, 7)
-
     products = await get_url(curch_pages)
-
     for sub_item in products:
         for item in sub_item:
-            if item['id'] == articul:
-                products_list.append({
-                    'pr_articul': item['id'],
-                    'pr_name': item['name'],
-                    'pr_page': count,
-                })
+            for articul in articuls_list:
+                if item['id'] == articul:
+                    products_list.append({
+                        'pr_articul': item['id'],
+                        'pr_name': item['name'],
+                        'pr_page': count,
+                    })
         count += 1
-    # print(products_list)
     with open('catch_async.json', mode='w', encoding='utf8') as f:
         json.dump(products_list, f, indent=4, ensure_ascii=False)
 
 
 async def main():
-    await get_data(86210392)
-    await get_data(39408901)
-    await get_data(100749785)
-    await get_data(43127482)
-    await get_data(44325545)
-    await get_data(64746739)
-    # await get_data(54673003)
+    await get_data([86210392, 39408901, 100749785, 43127482, 44325545, 64746739])
+    # await get_data(86210392)
+    # await get_data(39408901)
+    # await get_data(100749785)
+    # await get_data(43127482)
+    # await get_data(44325545)
+    # await get_data(64746739)
+    # await get_data(54673003) """на 100 стр."""
 
 
 if __name__ == '__main__':
