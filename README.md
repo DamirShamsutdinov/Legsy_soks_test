@@ -1,6 +1,5 @@
 ## Legsy_soks_test
 
-
 ### Стек технологий
 ![python version](https://img.shields.io/badge/Python-3.9-yellowgreen) 
 ![python version](https://img.shields.io/badge/aiogram-2.23.1-yellowgreen) 
