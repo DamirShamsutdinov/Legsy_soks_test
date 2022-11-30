@@ -1,8 +1,6 @@
-import asyncio
 import json
 
 from aiogram import Bot, Dispatcher, executor, types
-from aiogram.dispatcher.filters import Text
 
 from main_parsing_async import get_data
 
@@ -15,27 +13,25 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands="start")
 async def start_message(message: types.Message):
     await message.answer(
-        "Введите артикул товара или несколько (чз пробел)"
+        "Введите артикул товара или несколько (чз пробел)",
     )
 
 
-@dp.message_handler(Text(equals="Мужские костюмы"))
-async def get_discount_sneakers(message: types.Message):
+@dp.message_handler()
+async def post_data(message: types.Message):
     try:
-        # sup_value = message.text
-        # print(sup_value)
-        list2 = [int(i) for i in message.text.split()]
-        asyncio.get_event_loop().run_until_complete(
-            get_data(articuls_list=list2)
-        )
+        list_com = [int(i) for i in message.text.split()]
+        await get_data(articuls_list=list_com)
     except:
-        print('Неправильные вводные данные')
+        await message.answer(f"Данные введены некорректно, попробуйте еще раз!\n"
+                             f"Либо обратитесь к разработчикам.")
     else:
-        with open("result_data.json") as file:
+        print('Very good')
+        with open("result_data.json", encoding='utf8') as file:
             data = json.load(file)
-    for item in data:
-        card = f"{item['pr_articul']} {item['pr_name']} {item['pr_page']}"
-        await message.answer(card)
+        for item in data:
+            card = f'{item["pr_articul"]} - {item["pr_name"]} - {item["pr_page"]}'
+            await message.answer(card)
 
 
 def main():
