@@ -51,7 +51,6 @@ async def post_data(message: types.Message):
             "Либо обратитесь к разработчикам."
         )
     else:
-        # print("Very good")
         with open("result_data.json", encoding="utf8") as file:
             data = json.load(file)
         for item in data:
