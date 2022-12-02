@@ -18,7 +18,7 @@
 <br>Ждем несколько секунд! 
 <br>И Бот должен выдать подобную информацию (Артикул - Название_товара - Страница_с_товаром)
 <br><br>
-![](https://github.com/DamirShamsutdinov/Legsy_soks_test/робит_ТГ.jpg)
+![]((робит_ТГ.jpg))
 
 
 ### ps
@@ -35,5 +35,3 @@ MAC: python3 -m pip install --upgrade pip
 
 pip install -r requirements.txt
 ```
-
-
