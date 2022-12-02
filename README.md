@@ -18,7 +18,7 @@
 <br>Ждем несколько секунд! 
 <br>И Бот должен выдать подобную информацию (Артикул - Название_товара - Страница_с_товаром)
 <br><br>
-![alt text](робит_ТГ.jpg)
+![alt text](https://github.com/DamirShamsutdinov/Legsy_soks_test/blob/main/робит_ТГ.jpg)
 
 
 ### ps
