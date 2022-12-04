@@ -6,6 +6,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 from dotenv import load_dotenv
 
 from main_parsing_async import get_data
@@ -15,19 +16,23 @@ load_dotenv()
 bot = Bot(token=os.getenv("TOKEN"))
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-start_buttons = ['Москва']
-keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-keyboard.add(*start_buttons)
+keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+keyboard.add(KeyboardButton('Москва'))
 
 
 class SearchParameters(StatesGroup):
     articul = State()
 
 
+async def on_startup(_):
+    print('Я запустился!')
+
+
 @dp.message_handler(commands=["start"])
 async def command_start(message: types.Message):
-    await message.answer(
-        'Привет! Выбери город',
+    await bot.send_message(
+        chat_id=message.chat.id,
+        text='Привет! Выбери город',
         reply_markup=keyboard
     )
 
@@ -63,4 +68,4 @@ async def post_data(message: types.Message):
 
 
 if __name__ == "__main__":
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
